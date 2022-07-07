@@ -1,0 +1,100 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-historial-ventas-heading" data-cy="HistorialVentasCreateUpdateHeading">Create or edit a Historial Ventas</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_fechaVenta">Fecha Venta</label>
+          <div class="d-flex">
+            <input
+              id="field_fechaVenta"
+              data-cy="fechaVenta"
+              type="datetime-local"
+              class="form-control"
+              name="fechaVenta"
+              formControlName="fechaVenta"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_endDate">End Date</label>
+          <div class="d-flex">
+            <input
+              id="field_endDate"
+              data-cy="endDate"
+              type="datetime-local"
+              class="form-control"
+              name="endDate"
+              formControlName="endDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_comisionMensajeria">Comision Mensajeria</label>
+          <input
+            type="number"
+            class="form-control"
+            name="comisionMensajeria"
+            id="field_comisionMensajeria"
+            data-cy="comisionMensajeria"
+            formControlName="comisionMensajeria"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_articulo">Articulo</label>
+          <select class="form-control" id="field_articulo" data-cy="articulo" name="articulo" formControlName="articulo">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="articuloOption.id === editForm.get('articulo')!.value?.id ? editForm.get('articulo')!.value : articuloOption"
+              *ngFor="let articuloOption of articulosCollection; trackBy: trackArticuloById"
+            >
+              {{ articuloOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_corredor">Corredor</label>
+          <select class="form-control" id="field_corredor" data-cy="corredor" name="corredor" formControlName="corredor">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="vendedorOption.id === editForm.get('corredor')!.value?.id ? editForm.get('corredor')!.value : vendedorOption"
+              *ngFor="let vendedorOption of corredorsCollection; trackBy: trackVendedorById"
+            >
+              {{ vendedorOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
