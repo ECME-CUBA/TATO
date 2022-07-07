@@ -1,0 +1,64 @@
+
+
+// an ignored comment
+/** not an ignored comment */
+
+
+entity Vendedor {
+	nombre String required
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+
+
+/**
+ * The Employee entity.
+ */
+
+
+entity Articulo {
+	nombre String,
+	marca String,
+	precio Float,
+    cantidad Integer,
+    costo Float
+}
+
+entity HistorialVentas {
+    fechaVenta Instant,
+	endDate Instant,
+    comisionMensajeria Float
+    
+}
+
+
+
+
+
+
+// defining multiple OneToMany relationships with comments
+
+
+
+// defining multiple oneToOne relationships
+relationship OneToOne {
+	HistorialVentas{articulo} to Articulo,
+	HistorialVentas{corredor} to Vendedor,
+	
+}
+
+// Set pagination options
+
+paginate Articulo,Vendedor,Articulo with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl 
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

@@ -1,0 +1,43 @@
+{
+  "applications": "*",
+  "changelogDate": "20220707160323",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "historial_ventas",
+  "fields": [
+    {
+      "fieldName": "fechaVenta",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "comisionMensajeria",
+      "fieldType": "Float"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "HistorialVentas",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "articulo",
+      "otherEntityRelationshipName": "historialVentas",
+      "ownerSide": true,
+      "relationshipName": "articulo",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "vendedor",
+      "otherEntityRelationshipName": "historialVentas",
+      "ownerSide": true,
+      "relationshipName": "corredor",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -48,6 +48,9 @@ public class CacheConfiguration {
             createCache(cm, com.tato.movil.domain.User.class.getName());
             createCache(cm, com.tato.movil.domain.Authority.class.getName());
             createCache(cm, com.tato.movil.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.tato.movil.domain.Vendedor.class.getName());
+            createCache(cm, com.tato.movil.domain.Articulo.class.getName());
+            createCache(cm, com.tato.movil.domain.HistorialVentas.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

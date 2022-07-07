@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+    <!--
+        Added the constraints for entity HistorialVentas.
+    -->
+    <changeSet id="20220707160323-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="articulo_id"
+                                 baseTableName="historial_ventas"
+                                 constraintName="fk_historial_ventas__articulo_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="articulo"/>
+
+        <addForeignKeyConstraint baseColumnNames="corredor_id"
+                                 baseTableName="historial_ventas"
+                                 constraintName="fk_historial_ventas__corredor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vendedor"/>
+    </changeSet>
+</databaseChangeLog>

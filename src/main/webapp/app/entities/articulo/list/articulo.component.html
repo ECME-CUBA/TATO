@@ -1,0 +1,104 @@
+<div>
+  <h2 id="page-heading" data-cy="ArticuloHeading">
+    <span>Articulos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-articulo"
+        [routerLink]="['/articulo/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Articulo </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="articulos?.length === 0">
+    <span>No articulos found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="articulos && articulos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="nombre"><span>Nombre</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="marca"><span>Marca</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="precio"><span>Precio</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="cantidad"><span>Cantidad</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="costo"><span>Costo</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let articulo of articulos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/articulo', articulo.id, 'view']">{{ articulo.id }}</a>
+          </td>
+          <td>{{ articulo.nombre }}</td>
+          <td>{{ articulo.marca }}</td>
+          <td>{{ articulo.precio }}</td>
+          <td>{{ articulo.cantidad }}</td>
+          <td>{{ articulo.costo }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/articulo', articulo.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/articulo', articulo.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(articulo)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="articulos && articulos.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>
