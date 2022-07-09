@@ -44,9 +44,6 @@ public class HistorialVentasServiceImpl implements HistorialVentasService {
         return historialVentasRepository
             .findById(historialVentas.getId())
             .map(existingHistorialVentas -> {
-                if (historialVentas.getMensajero() != null) {
-                    existingHistorialVentas.setMensajero(historialVentas.getMensajero());
-                }
                 if (historialVentas.getFechaVenta() != null) {
                     existingHistorialVentas.setFechaVenta(historialVentas.getFechaVenta());
                 }

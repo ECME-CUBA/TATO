@@ -31,9 +31,6 @@ import org.springframework.transaction.annotation.Transactional;
 @WithMockUser
 class HistorialVentasResourceIT {
 
-    private static final String DEFAULT_MENSAJERO = "AAAAAAAAAA";
-    private static final String UPDATED_MENSAJERO = "BBBBBBBBBB";
-
     private static final Instant DEFAULT_FECHA_VENTA = Instant.ofEpochMilli(0L);
     private static final Instant UPDATED_FECHA_VENTA = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
@@ -65,7 +62,6 @@ class HistorialVentasResourceIT {
      */
     public static HistorialVentas createEntity(EntityManager em) {
         HistorialVentas historialVentas = new HistorialVentas()
-            .mensajero(DEFAULT_MENSAJERO)
             .fechaVenta(DEFAULT_FECHA_VENTA)
             .comisionMensajeria(DEFAULT_COMISION_MENSAJERIA);
         return historialVentas;
@@ -79,7 +75,6 @@ class HistorialVentasResourceIT {
      */
     public static HistorialVentas createUpdatedEntity(EntityManager em) {
         HistorialVentas historialVentas = new HistorialVentas()
-            .mensajero(UPDATED_MENSAJERO)
             .fechaVenta(UPDATED_FECHA_VENTA)
             .comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
         return historialVentas;
@@ -105,7 +100,6 @@ class HistorialVentasResourceIT {
         List<HistorialVentas> historialVentasList = historialVentasRepository.findAll();
         assertThat(historialVentasList).hasSize(databaseSizeBeforeCreate + 1);
         HistorialVentas testHistorialVentas = historialVentasList.get(historialVentasList.size() - 1);
-        assertThat(testHistorialVentas.getMensajero()).isEqualTo(DEFAULT_MENSAJERO);
         assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(DEFAULT_FECHA_VENTA);
         assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(DEFAULT_COMISION_MENSAJERIA);
     }
@@ -142,7 +136,6 @@ class HistorialVentasResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(historialVentas.getId().intValue())))
-            .andExpect(jsonPath("$.[*].mensajero").value(hasItem(DEFAULT_MENSAJERO)))
             .andExpect(jsonPath("$.[*].fechaVenta").value(hasItem(DEFAULT_FECHA_VENTA.toString())))
             .andExpect(jsonPath("$.[*].comisionMensajeria").value(hasItem(DEFAULT_COMISION_MENSAJERIA.doubleValue())));
     }
@@ -159,7 +152,6 @@ class HistorialVentasResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(historialVentas.getId().intValue()))
-            .andExpect(jsonPath("$.mensajero").value(DEFAULT_MENSAJERO))
             .andExpect(jsonPath("$.fechaVenta").value(DEFAULT_FECHA_VENTA.toString()))
             .andExpect(jsonPath("$.comisionMensajeria").value(DEFAULT_COMISION_MENSAJERIA.doubleValue()));
     }
@@ -183,7 +175,7 @@ class HistorialVentasResourceIT {
         HistorialVentas updatedHistorialVentas = historialVentasRepository.findById(historialVentas.getId()).get();
         // Disconnect from session so that the updates on updatedHistorialVentas are not directly saved in db
         em.detach(updatedHistorialVentas);
-        updatedHistorialVentas.mensajero(UPDATED_MENSAJERO).fechaVenta(UPDATED_FECHA_VENTA).comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
+        updatedHistorialVentas.fechaVenta(UPDATED_FECHA_VENTA).comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
 
         restHistorialVentasMockMvc
             .perform(
@@ -197,7 +189,6 @@ class HistorialVentasResourceIT {
         List<HistorialVentas> historialVentasList = historialVentasRepository.findAll();
         assertThat(historialVentasList).hasSize(databaseSizeBeforeUpdate);
         HistorialVentas testHistorialVentas = historialVentasList.get(historialVentasList.size() - 1);
-        assertThat(testHistorialVentas.getMensajero()).isEqualTo(UPDATED_MENSAJERO);
         assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(UPDATED_FECHA_VENTA);
         assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(UPDATED_COMISION_MENSAJERIA);
     }
@@ -272,7 +263,7 @@ class HistorialVentasResourceIT {
         HistorialVentas partialUpdatedHistorialVentas = new HistorialVentas();
         partialUpdatedHistorialVentas.setId(historialVentas.getId());
 
-        partialUpdatedHistorialVentas.fechaVenta(UPDATED_FECHA_VENTA);
+        partialUpdatedHistorialVentas.comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
 
         restHistorialVentasMockMvc
             .perform(
@@ -286,9 +277,8 @@ class HistorialVentasResourceIT {
         List<HistorialVentas> historialVentasList = historialVentasRepository.findAll();
         assertThat(historialVentasList).hasSize(databaseSizeBeforeUpdate);
         HistorialVentas testHistorialVentas = historialVentasList.get(historialVentasList.size() - 1);
-        assertThat(testHistorialVentas.getMensajero()).isEqualTo(DEFAULT_MENSAJERO);
-        assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(UPDATED_FECHA_VENTA);
-        assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(DEFAULT_COMISION_MENSAJERIA);
+        assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(DEFAULT_FECHA_VENTA);
+        assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(UPDATED_COMISION_MENSAJERIA);
     }
 
     @Test
@@ -303,10 +293,7 @@ class HistorialVentasResourceIT {
         HistorialVentas partialUpdatedHistorialVentas = new HistorialVentas();
         partialUpdatedHistorialVentas.setId(historialVentas.getId());
 
-        partialUpdatedHistorialVentas
-            .mensajero(UPDATED_MENSAJERO)
-            .fechaVenta(UPDATED_FECHA_VENTA)
-            .comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
+        partialUpdatedHistorialVentas.fechaVenta(UPDATED_FECHA_VENTA).comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
 
         restHistorialVentasMockMvc
             .perform(
@@ -320,7 +307,6 @@ class HistorialVentasResourceIT {
         List<HistorialVentas> historialVentasList = historialVentasRepository.findAll();
         assertThat(historialVentasList).hasSize(databaseSizeBeforeUpdate);
         HistorialVentas testHistorialVentas = historialVentasList.get(historialVentasList.size() - 1);
-        assertThat(testHistorialVentas.getMensajero()).isEqualTo(UPDATED_MENSAJERO);
         assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(UPDATED_FECHA_VENTA);
         assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(UPDATED_COMISION_MENSAJERIA);
     }

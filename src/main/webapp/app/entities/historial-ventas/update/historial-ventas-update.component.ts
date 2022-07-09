@@ -27,7 +27,6 @@ export class HistorialVentasUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    mensajero: [],
     fechaVenta: [],
     comisionMensajeria: [],
     articulo: [],
@@ -99,7 +98,6 @@ export class HistorialVentasUpdateComponent implements OnInit {
   protected updateForm(historialVentas: IHistorialVentas): void {
     this.editForm.patchValue({
       id: historialVentas.id,
-      mensajero: historialVentas.mensajero,
       fechaVenta: historialVentas.fechaVenta ? historialVentas.fechaVenta.format(DATE_TIME_FORMAT) : null,
       comisionMensajeria: historialVentas.comisionMensajeria,
       articulo: historialVentas.articulo,
@@ -136,7 +134,6 @@ export class HistorialVentasUpdateComponent implements OnInit {
     return {
       ...new HistorialVentas(),
       id: this.editForm.get(['id'])!.value,
-      mensajero: this.editForm.get(['mensajero'])!.value,
       fechaVenta: this.editForm.get(['fechaVenta'])!.value ? dayjs(this.editForm.get(['fechaVenta'])!.value, DATE_TIME_FORMAT) : undefined,
       comisionMensajeria: this.editForm.get(['comisionMensajeria'])!.value,
       articulo: this.editForm.get(['articulo'])!.value,

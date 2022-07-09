@@ -6,10 +6,6 @@
   "entityTableName": "historial_ventas",
   "fields": [
     {
-      "fieldName": "mensajero",
-      "fieldType": "String"
-    },
-    {
       "fieldName": "fechaVenta",
       "fieldType": "Instant"
     },

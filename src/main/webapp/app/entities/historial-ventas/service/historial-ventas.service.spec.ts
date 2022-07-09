@@ -25,7 +25,6 @@ describe('HistorialVentas Service', () => {
 
     elemDefault = {
       id: 0,
-      mensajero: 'AAAAAAA',
       fechaVenta: currentDate,
       comisionMensajeria: 0,
     };
@@ -74,7 +73,6 @@ describe('HistorialVentas Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 1,
-          mensajero: 'BBBBBB',
           fechaVenta: currentDate.format(DATE_TIME_FORMAT),
           comisionMensajeria: 1,
         },
@@ -98,8 +96,7 @@ describe('HistorialVentas Service', () => {
     it('should partial update a HistorialVentas', () => {
       const patchObject = Object.assign(
         {
-          mensajero: 'BBBBBB',
-          comisionMensajeria: 1,
+          fechaVenta: currentDate.format(DATE_TIME_FORMAT),
         },
         new HistorialVentas()
       );
@@ -124,7 +121,6 @@ describe('HistorialVentas Service', () => {
       const returnedFromService = Object.assign(
         {
           id: 1,
-          mensajero: 'BBBBBB',
           fechaVenta: currentDate.format(DATE_TIME_FORMAT),
           comisionMensajeria: 1,
         },
@@ -183,7 +179,7 @@ describe('HistorialVentas Service', () => {
       });
 
       it('should add only unique HistorialVentas to an array', () => {
-        const historialVentasArray: IHistorialVentas[] = [{ id: 123 }, { id: 456 }, { id: 12825 }];
+        const historialVentasArray: IHistorialVentas[] = [{ id: 123 }, { id: 456 }, { id: 93703 }];
         const historialVentasCollection: IHistorialVentas[] = [{ id: 123 }];
         expectedResult = service.addHistorialVentasToCollectionIfMissing(historialVentasCollection, ...historialVentasArray);
         expect(expectedResult).toHaveLength(3);
