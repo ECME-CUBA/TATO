@@ -85,14 +85,12 @@ export class HistorialVentasService {
   protected convertDateFromClient(historialVentas: IHistorialVentas): IHistorialVentas {
     return Object.assign({}, historialVentas, {
       fechaVenta: historialVentas.fechaVenta?.isValid() ? historialVentas.fechaVenta.toJSON() : undefined,
-      endDate: historialVentas.endDate?.isValid() ? historialVentas.endDate.toJSON() : undefined,
     });
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
       res.body.fechaVenta = res.body.fechaVenta ? dayjs(res.body.fechaVenta) : undefined;
-      res.body.endDate = res.body.endDate ? dayjs(res.body.endDate) : undefined;
     }
     return res;
   }
@@ -101,7 +99,6 @@ export class HistorialVentasService {
     if (res.body) {
       res.body.forEach((historialVentas: IHistorialVentas) => {
         historialVentas.fechaVenta = historialVentas.fechaVenta ? dayjs(historialVentas.fechaVenta) : undefined;
-        historialVentas.endDate = historialVentas.endDate ? dayjs(historialVentas.endDate) : undefined;
       });
     }
     return res;

@@ -28,7 +28,6 @@ export class HistorialVentasUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     fechaVenta: [],
-    endDate: [],
     comisionMensajeria: [],
     articulo: [],
     corredor: [],
@@ -47,7 +46,6 @@ export class HistorialVentasUpdateComponent implements OnInit {
       if (historialVentas.id === undefined) {
         const today = dayjs().startOf('day');
         historialVentas.fechaVenta = today;
-        historialVentas.endDate = today;
       }
 
       this.updateForm(historialVentas);
@@ -101,7 +99,6 @@ export class HistorialVentasUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: historialVentas.id,
       fechaVenta: historialVentas.fechaVenta ? historialVentas.fechaVenta.format(DATE_TIME_FORMAT) : null,
-      endDate: historialVentas.endDate ? historialVentas.endDate.format(DATE_TIME_FORMAT) : null,
       comisionMensajeria: historialVentas.comisionMensajeria,
       articulo: historialVentas.articulo,
       corredor: historialVentas.corredor,
@@ -138,7 +135,6 @@ export class HistorialVentasUpdateComponent implements OnInit {
       ...new HistorialVentas(),
       id: this.editForm.get(['id'])!.value,
       fechaVenta: this.editForm.get(['fechaVenta'])!.value ? dayjs(this.editForm.get(['fechaVenta'])!.value, DATE_TIME_FORMAT) : undefined,
-      endDate: this.editForm.get(['endDate'])!.value ? dayjs(this.editForm.get(['endDate'])!.value, DATE_TIME_FORMAT) : undefined,
       comisionMensajeria: this.editForm.get(['comisionMensajeria'])!.value,
       articulo: this.editForm.get(['articulo'])!.value,
       corredor: this.editForm.get(['corredor'])!.value,

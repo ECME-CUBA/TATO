@@ -47,9 +47,6 @@ public class HistorialVentasServiceImpl implements HistorialVentasService {
                 if (historialVentas.getFechaVenta() != null) {
                     existingHistorialVentas.setFechaVenta(historialVentas.getFechaVenta());
                 }
-                if (historialVentas.getEndDate() != null) {
-                    existingHistorialVentas.setEndDate(historialVentas.getEndDate());
-                }
                 if (historialVentas.getComisionMensajeria() != null) {
                     existingHistorialVentas.setComisionMensajeria(historialVentas.getComisionMensajeria());
                 }

@@ -34,7 +34,6 @@
         <tr>
           <th scope="col"><span>ID</span></th>
           <th scope="col"><span>Fecha Venta</span></th>
-          <th scope="col"><span>End Date</span></th>
           <th scope="col"><span>Comision Mensajeria</span></th>
           <th scope="col"><span>Articulo</span></th>
           <th scope="col"><span>Corredor</span></th>
@@ -47,7 +46,6 @@
             <a [routerLink]="['/historial-ventas', historialVentas.id, 'view']">{{ historialVentas.id }}</a>
           </td>
           <td>{{ historialVentas.fechaVenta | formatMediumDatetime }}</td>
-          <td>{{ historialVentas.endDate | formatMediumDatetime }}</td>
           <td>{{ historialVentas.comisionMensajeria }}</td>
           <td>
             <div *ngIf="historialVentas.articulo">

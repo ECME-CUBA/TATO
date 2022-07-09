@@ -10,10 +10,6 @@
       "fieldType": "Instant"
     },
     {
-      "fieldName": "endDate",
-      "fieldType": "Instant"
-    },
-    {
       "fieldName": "comisionMensajeria",
       "fieldType": "Float"
     }

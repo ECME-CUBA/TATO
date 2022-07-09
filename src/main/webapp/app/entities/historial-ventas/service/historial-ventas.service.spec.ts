@@ -26,7 +26,6 @@ describe('HistorialVentas Service', () => {
     elemDefault = {
       id: 0,
       fechaVenta: currentDate,
-      endDate: currentDate,
       comisionMensajeria: 0,
     };
   });
@@ -36,7 +35,6 @@ describe('HistorialVentas Service', () => {
       const returnedFromService = Object.assign(
         {
           fechaVenta: currentDate.format(DATE_TIME_FORMAT),
-          endDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -53,7 +51,6 @@ describe('HistorialVentas Service', () => {
         {
           id: 0,
           fechaVenta: currentDate.format(DATE_TIME_FORMAT),
-          endDate: currentDate.format(DATE_TIME_FORMAT),
         },
         elemDefault
       );
@@ -61,7 +58,6 @@ describe('HistorialVentas Service', () => {
       const expected = Object.assign(
         {
           fechaVenta: currentDate,
-          endDate: currentDate,
         },
         returnedFromService
       );
@@ -78,7 +74,6 @@ describe('HistorialVentas Service', () => {
         {
           id: 1,
           fechaVenta: currentDate.format(DATE_TIME_FORMAT),
-          endDate: currentDate.format(DATE_TIME_FORMAT),
           comisionMensajeria: 1,
         },
         elemDefault
@@ -87,7 +82,6 @@ describe('HistorialVentas Service', () => {
       const expected = Object.assign(
         {
           fechaVenta: currentDate,
-          endDate: currentDate,
         },
         returnedFromService
       );
@@ -103,7 +97,6 @@ describe('HistorialVentas Service', () => {
       const patchObject = Object.assign(
         {
           fechaVenta: currentDate.format(DATE_TIME_FORMAT),
-          comisionMensajeria: 1,
         },
         new HistorialVentas()
       );
@@ -113,7 +106,6 @@ describe('HistorialVentas Service', () => {
       const expected = Object.assign(
         {
           fechaVenta: currentDate,
-          endDate: currentDate,
         },
         returnedFromService
       );
@@ -130,7 +122,6 @@ describe('HistorialVentas Service', () => {
         {
           id: 1,
           fechaVenta: currentDate.format(DATE_TIME_FORMAT),
-          endDate: currentDate.format(DATE_TIME_FORMAT),
           comisionMensajeria: 1,
         },
         elemDefault
@@ -139,7 +130,6 @@ describe('HistorialVentas Service', () => {
       const expected = Object.assign(
         {
           fechaVenta: currentDate,
-          endDate: currentDate,
         },
         returnedFromService
       );
@@ -189,7 +179,7 @@ describe('HistorialVentas Service', () => {
       });
 
       it('should add only unique HistorialVentas to an array', () => {
-        const historialVentasArray: IHistorialVentas[] = [{ id: 123 }, { id: 456 }, { id: 12825 }];
+        const historialVentasArray: IHistorialVentas[] = [{ id: 123 }, { id: 456 }, { id: 93703 }];
         const historialVentasCollection: IHistorialVentas[] = [{ id: 123 }];
         expectedResult = service.addHistorialVentasToCollectionIfMissing(historialVentasCollection, ...historialVentasArray);
         expect(expectedResult).toHaveLength(3);

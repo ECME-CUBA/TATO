@@ -24,9 +24,6 @@ public class HistorialVentas implements Serializable {
     @Column(name = "fecha_venta")
     private Instant fechaVenta;
 
-    @Column(name = "end_date")
-    private Instant endDate;
-
     @Column(name = "comision_mensajeria")
     private Float comisionMensajeria;
 
@@ -64,19 +61,6 @@ public class HistorialVentas implements Serializable {
 
     public void setFechaVenta(Instant fechaVenta) {
         this.fechaVenta = fechaVenta;
-    }
-
-    public Instant getEndDate() {
-        return this.endDate;
-    }
-
-    public HistorialVentas endDate(Instant endDate) {
-        this.setEndDate(endDate);
-        return this;
-    }
-
-    public void setEndDate(Instant endDate) {
-        this.endDate = endDate;
     }
 
     public Float getComisionMensajeria() {
@@ -143,7 +127,6 @@ public class HistorialVentas implements Serializable {
         return "HistorialVentas{" +
             "id=" + getId() +
             ", fechaVenta='" + getFechaVenta() + "'" +
-            ", endDate='" + getEndDate() + "'" +
             ", comisionMensajeria=" + getComisionMensajeria() +
             "}";
     }
