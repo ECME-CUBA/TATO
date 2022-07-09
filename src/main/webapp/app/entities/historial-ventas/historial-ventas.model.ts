@@ -4,6 +4,7 @@ import { IVendedor } from 'app/entities/vendedor/vendedor.model';
 
 export interface IHistorialVentas {
   id?: number;
+  mensajero?: string | null;
   fechaVenta?: dayjs.Dayjs | null;
   comisionMensajeria?: number | null;
   articulo?: IArticulo | null;
@@ -13,6 +14,7 @@ export interface IHistorialVentas {
 export class HistorialVentas implements IHistorialVentas {
   constructor(
     public id?: number,
+    public mensajero?: string | null,
     public fechaVenta?: dayjs.Dayjs | null,
     public comisionMensajeria?: number | null,
     public articulo?: IArticulo | null,

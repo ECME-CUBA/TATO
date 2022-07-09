@@ -21,6 +21,9 @@ public class HistorialVentas implements Serializable {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "mensajero")
+    private String mensajero;
+
     @Column(name = "fecha_venta")
     private Instant fechaVenta;
 
@@ -48,6 +51,19 @@ public class HistorialVentas implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getMensajero() {
+        return this.mensajero;
+    }
+
+    public HistorialVentas mensajero(String mensajero) {
+        this.setMensajero(mensajero);
+        return this;
+    }
+
+    public void setMensajero(String mensajero) {
+        this.mensajero = mensajero;
     }
 
     public Instant getFechaVenta() {
@@ -126,6 +142,7 @@ public class HistorialVentas implements Serializable {
     public String toString() {
         return "HistorialVentas{" +
             "id=" + getId() +
+            ", mensajero='" + getMensajero() + "'" +
             ", fechaVenta='" + getFechaVenta() + "'" +
             ", comisionMensajeria=" + getComisionMensajeria() +
             "}";
