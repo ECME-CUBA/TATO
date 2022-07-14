@@ -37,6 +37,9 @@ class HistorialVentasResourceIT {
     private static final Float DEFAULT_COMISION_MENSAJERIA = 1F;
     private static final Float UPDATED_COMISION_MENSAJERIA = 2F;
 
+    private static final Integer DEFAULT_CANTIDAD = 1;
+    private static final Integer UPDATED_CANTIDAD = 2;
+
     private static final String ENTITY_API_URL = "/api/historial-ventas";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -63,7 +66,8 @@ class HistorialVentasResourceIT {
     public static HistorialVentas createEntity(EntityManager em) {
         HistorialVentas historialVentas = new HistorialVentas()
             .fechaVenta(DEFAULT_FECHA_VENTA)
-            .comisionMensajeria(DEFAULT_COMISION_MENSAJERIA);
+            .comisionMensajeria(DEFAULT_COMISION_MENSAJERIA)
+            .cantidad(DEFAULT_CANTIDAD);
         return historialVentas;
     }
 
@@ -76,7 +80,8 @@ class HistorialVentasResourceIT {
     public static HistorialVentas createUpdatedEntity(EntityManager em) {
         HistorialVentas historialVentas = new HistorialVentas()
             .fechaVenta(UPDATED_FECHA_VENTA)
-            .comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
+            .comisionMensajeria(UPDATED_COMISION_MENSAJERIA)
+            .cantidad(UPDATED_CANTIDAD);
         return historialVentas;
     }
 
@@ -102,6 +107,7 @@ class HistorialVentasResourceIT {
         HistorialVentas testHistorialVentas = historialVentasList.get(historialVentasList.size() - 1);
         assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(DEFAULT_FECHA_VENTA);
         assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(DEFAULT_COMISION_MENSAJERIA);
+        assertThat(testHistorialVentas.getCantidad()).isEqualTo(DEFAULT_CANTIDAD);
     }
 
     @Test
@@ -137,7 +143,8 @@ class HistorialVentasResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(historialVentas.getId().intValue())))
             .andExpect(jsonPath("$.[*].fechaVenta").value(hasItem(DEFAULT_FECHA_VENTA.toString())))
-            .andExpect(jsonPath("$.[*].comisionMensajeria").value(hasItem(DEFAULT_COMISION_MENSAJERIA.doubleValue())));
+            .andExpect(jsonPath("$.[*].comisionMensajeria").value(hasItem(DEFAULT_COMISION_MENSAJERIA.doubleValue())))
+            .andExpect(jsonPath("$.[*].cantidad").value(hasItem(DEFAULT_CANTIDAD)));
     }
 
     @Test
@@ -153,7 +160,8 @@ class HistorialVentasResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(historialVentas.getId().intValue()))
             .andExpect(jsonPath("$.fechaVenta").value(DEFAULT_FECHA_VENTA.toString()))
-            .andExpect(jsonPath("$.comisionMensajeria").value(DEFAULT_COMISION_MENSAJERIA.doubleValue()));
+            .andExpect(jsonPath("$.comisionMensajeria").value(DEFAULT_COMISION_MENSAJERIA.doubleValue()))
+            .andExpect(jsonPath("$.cantidad").value(DEFAULT_CANTIDAD));
     }
 
     @Test
@@ -175,7 +183,7 @@ class HistorialVentasResourceIT {
         HistorialVentas updatedHistorialVentas = historialVentasRepository.findById(historialVentas.getId()).get();
         // Disconnect from session so that the updates on updatedHistorialVentas are not directly saved in db
         em.detach(updatedHistorialVentas);
-        updatedHistorialVentas.fechaVenta(UPDATED_FECHA_VENTA).comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
+        updatedHistorialVentas.fechaVenta(UPDATED_FECHA_VENTA).comisionMensajeria(UPDATED_COMISION_MENSAJERIA).cantidad(UPDATED_CANTIDAD);
 
         restHistorialVentasMockMvc
             .perform(
@@ -191,6 +199,7 @@ class HistorialVentasResourceIT {
         HistorialVentas testHistorialVentas = historialVentasList.get(historialVentasList.size() - 1);
         assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(UPDATED_FECHA_VENTA);
         assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(UPDATED_COMISION_MENSAJERIA);
+        assertThat(testHistorialVentas.getCantidad()).isEqualTo(UPDATED_CANTIDAD);
     }
 
     @Test
@@ -279,6 +288,7 @@ class HistorialVentasResourceIT {
         HistorialVentas testHistorialVentas = historialVentasList.get(historialVentasList.size() - 1);
         assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(DEFAULT_FECHA_VENTA);
         assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(UPDATED_COMISION_MENSAJERIA);
+        assertThat(testHistorialVentas.getCantidad()).isEqualTo(DEFAULT_CANTIDAD);
     }
 
     @Test
@@ -293,7 +303,10 @@ class HistorialVentasResourceIT {
         HistorialVentas partialUpdatedHistorialVentas = new HistorialVentas();
         partialUpdatedHistorialVentas.setId(historialVentas.getId());
 
-        partialUpdatedHistorialVentas.fechaVenta(UPDATED_FECHA_VENTA).comisionMensajeria(UPDATED_COMISION_MENSAJERIA);
+        partialUpdatedHistorialVentas
+            .fechaVenta(UPDATED_FECHA_VENTA)
+            .comisionMensajeria(UPDATED_COMISION_MENSAJERIA)
+            .cantidad(UPDATED_CANTIDAD);
 
         restHistorialVentasMockMvc
             .perform(
@@ -309,6 +322,7 @@ class HistorialVentasResourceIT {
         HistorialVentas testHistorialVentas = historialVentasList.get(historialVentasList.size() - 1);
         assertThat(testHistorialVentas.getFechaVenta()).isEqualTo(UPDATED_FECHA_VENTA);
         assertThat(testHistorialVentas.getComisionMensajeria()).isEqualTo(UPDATED_COMISION_MENSAJERIA);
+        assertThat(testHistorialVentas.getCantidad()).isEqualTo(UPDATED_CANTIDAD);
     }
 
     @Test

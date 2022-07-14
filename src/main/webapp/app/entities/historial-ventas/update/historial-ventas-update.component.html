@@ -39,6 +39,11 @@
         </div>
 
         <div class="row mb-3">
+          <label class="form-label" for="field_cantidad">Cantidad</label>
+          <input type="number" class="form-control" name="cantidad" id="field_cantidad" data-cy="cantidad" formControlName="cantidad" />
+        </div>
+
+        <div class="row mb-3">
           <label class="form-label" for="field_articulo">Articulo</label>
           <select class="form-control" id="field_articulo" data-cy="articulo" name="articulo" formControlName="articulo">
             <option [ngValue]="null"></option>

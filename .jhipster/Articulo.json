@@ -1,7 +1,7 @@
 {
   "applications": "*",
   "changelogDate": "20220707160322",
-  "dto": "no",
+  "dto": "yes",
   "embedded": false,
   "entityTableName": "articulo",
   "fields": [

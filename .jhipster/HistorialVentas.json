@@ -1,7 +1,7 @@
 {
   "applications": "*",
   "changelogDate": "20220707160323",
-  "dto": "no",
+  "dto": "yes",
   "embedded": false,
   "entityTableName": "historial_ventas",
   "fields": [
@@ -12,12 +12,16 @@
     {
       "fieldName": "comisionMensajeria",
       "fieldType": "Float"
+    },
+    {
+      "fieldName": "cantidad",
+      "fieldType": "Integer"
     }
   ],
   "fluentMethods": true,
   "jpaMetamodelFiltering": false,
   "name": "HistorialVentas",
-  "pagination": "no",
+  "pagination": "pagination",
   "readOnly": false,
   "relationships": [
     {

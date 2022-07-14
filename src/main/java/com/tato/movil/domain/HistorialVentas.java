@@ -27,6 +27,9 @@ public class HistorialVentas implements Serializable {
     @Column(name = "comision_mensajeria")
     private Float comisionMensajeria;
 
+    @Column(name = "cantidad")
+    private Integer cantidad;
+
     @OneToOne
     @JoinColumn(unique = true)
     private Articulo articulo;
@@ -74,6 +77,19 @@ public class HistorialVentas implements Serializable {
 
     public void setComisionMensajeria(Float comisionMensajeria) {
         this.comisionMensajeria = comisionMensajeria;
+    }
+
+    public Integer getCantidad() {
+        return this.cantidad;
+    }
+
+    public HistorialVentas cantidad(Integer cantidad) {
+        this.setCantidad(cantidad);
+        return this;
+    }
+
+    public void setCantidad(Integer cantidad) {
+        this.cantidad = cantidad;
     }
 
     public Articulo getArticulo() {
@@ -128,6 +144,7 @@ public class HistorialVentas implements Serializable {
             "id=" + getId() +
             ", fechaVenta='" + getFechaVenta() + "'" +
             ", comisionMensajeria=" + getComisionMensajeria() +
+            ", cantidad=" + getCantidad() +
             "}";
     }
 }

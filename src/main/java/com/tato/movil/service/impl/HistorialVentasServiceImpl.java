@@ -50,6 +50,9 @@ public class HistorialVentasServiceImpl implements HistorialVentasService {
                 if (historialVentas.getComisionMensajeria() != null) {
                     existingHistorialVentas.setComisionMensajeria(historialVentas.getComisionMensajeria());
                 }
+                if (historialVentas.getCantidad() != null) {
+                    existingHistorialVentas.setCantidad(historialVentas.getCantidad());
+                }
 
                 return existingHistorialVentas;
             })

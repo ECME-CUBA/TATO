@@ -35,6 +35,7 @@
           <th scope="col"><span>ID</span></th>
           <th scope="col"><span>Fecha Venta</span></th>
           <th scope="col"><span>Comision Mensajeria</span></th>
+          <th scope="col"><span>Cantidad</span></th>
           <th scope="col"><span>Articulo</span></th>
           <th scope="col"><span>Corredor</span></th>
           <th scope="col"></th>
@@ -47,6 +48,7 @@
           </td>
           <td>{{ historialVentas.fechaVenta | formatMediumDatetime }}</td>
           <td>{{ historialVentas.comisionMensajeria }}</td>
+          <td>{{ historialVentas.cantidad }}</td>
           <td>
             <div *ngIf="historialVentas.articulo">
               <a [routerLink]="['/articulo', historialVentas.articulo?.id, 'view']">{{ historialVentas.articulo?.id }}</a>
