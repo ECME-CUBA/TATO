@@ -3,6 +3,7 @@
   "changelogDate": "20220707160322",
   "dto": "yes",
   "embedded": false,
+  
   "entityTableName": "articulo",
   "fields": [
     {
@@ -28,7 +29,7 @@
   ],
   "fluentMethods": true,
   "javadoc": "The Employee entity.",
-  "jpaMetamodelFiltering": false,
+  "jpaMetamodelFiltering": true,
   "name": "Articulo",
   "pagination": "pagination",
   "readOnly": false,

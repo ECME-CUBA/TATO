@@ -1,6 +1,7 @@
 package com.tato.movil.service.impl;
 
 import com.tato.movil.domain.HistorialVentas;
+import com.tato.movil.repository.ArticuloRepository;
 import com.tato.movil.repository.HistorialVentasRepository;
 import com.tato.movil.service.HistorialVentasService;
 import java.util.List;
@@ -20,14 +21,27 @@ public class HistorialVentasServiceImpl implements HistorialVentasService {
     private final Logger log = LoggerFactory.getLogger(HistorialVentasServiceImpl.class);
 
     private final HistorialVentasRepository historialVentasRepository;
+    private final ArticuloRepository articuloRepository;
 
-    public HistorialVentasServiceImpl(HistorialVentasRepository historialVentasRepository) {
+    public HistorialVentasServiceImpl(HistorialVentasRepository historialVentasRepository, ArticuloRepository articuloRepository) {
         this.historialVentasRepository = historialVentasRepository;
+        this.articuloRepository = articuloRepository;
     }
 
     @Override
     public HistorialVentas save(HistorialVentas historialVentas) {
         log.debug("Request to save HistorialVentas : {}", historialVentas);
+
+        articuloRepository
+            .findById(historialVentas.getArticulo().getId())
+            .map(existingArticulo -> {
+                if (historialVentas.getArticulo().getCantidad() >= historialVentas.getCantidad()) {
+                    existingArticulo.setCantidad(historialVentas.getArticulo().getCantidad() - historialVentas.getCantidad());
+                }
+                return existingArticulo;
+            })
+            .map(articuloRepository::save);
+
         return historialVentasRepository.save(historialVentas);
     }
 
